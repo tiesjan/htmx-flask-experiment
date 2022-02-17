@@ -1,0 +1,207 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1.25rem;
+    padding: 0 1rem;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    margin-top: 3.5rem;
+}
+h2 {
+    margin-bottom: 1rem;
+    margin-top: 1.75rem;
+}
+
+button, input, select {
+    background-color: #fff;
+    border: 0.125rem solid #012;
+    font-family: sans-serif;
+    font-size: 1.25rem;
+    outline: none;
+    padding: 0.5rem;
+    transition: all 0.2s;
+}
+select {
+    padding-left: 0.25rem;
+}
+button:hover, input[type="submit"]:hover {
+    background-color: #f0f4ff;
+    cursor: pointer;
+}
+button:active, input[type="submit"]:active {
+    background-color: #cdf;
+}
+button.danger {
+    border-color: #e30;
+    color: #e00;
+}
+button.danger:hover {
+    background-color: #fff8f8
+}
+button.danger:active {
+    background-color: #fdd;
+}
+button .button-icon {
+    height: 1rem;
+    margin-right: 0.5rem;
+    width: 1rem;
+}
+input:focus, select:focus {
+    border-color: #0578cf;
+}
+
+.addressbook {
+    display: flex;
+    flex-direction: row;
+}
+
+.addressbook .addressbook-column {
+    height: 40rem;
+}
+
+.addressbook .contact-list {
+    border: 0.125rem solid #012;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1%;
+    width: 29%;
+}
+.addressbook .contact-list .contact-entries {
+    border-bottom: 0.125rem solid #012;
+    padding-bottom: 0.125rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+.addressbook .contact-list .contact-entry {
+    border-bottom: 0.0625rem solid #ccc;
+    padding: 0.65rem 0.5rem;
+    transition: background-color 0.2s;
+}
+.addressbook .contact-list .contact-entry:hover {
+    background-color: #fff0c8;
+    cursor: pointer;
+}
+.addressbook .contact-list .contact-entry.selected,
+.addressbook .contact-list .contact-entry.selected:hover {
+    background-color: #ffd880;
+}
+.addressbook .contact-list .message-entry {
+    color: #666;
+    font-style: italic;
+    padding: 0.75rem 0.5rem;
+}
+.addressbook .contact-list button.add-contact-button {
+    border: 0;
+}
+
+.addressbook .contact-details {
+    border: 0.125rem solid #012;
+    padding: 0 1.5rem;
+    width: 70%;
+}
+.addressbook .contact-details .contact-property {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem
+}
+.addressbook .contact-details .contact-property-name {
+    color: #444;
+    margin-right: 1rem;
+    width: 12.5rem;
+}
+.addressbook .contact-details .contact-property-name,
+.addressbook .contact-details .contact-property-value {
+    padding: 0.625rem;  /* aligned with inputs: 0.5rem padding + 0.125rem border */
+}
+.addressbook .contact-details .contact-property-name {
+    padding-left: 0;
+}
+.addressbook .contact-details .submit-buttons {
+    margin-top: 1.5rem;
+}
+
+.indicator-bar {
+    background-color: #cfe0ff;
+    height: 0.25rem;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.indicator-bar .indicator-bar-value {
+    animation: indicatorBarAnimation 1.5s infinite linear;
+    background-color: #0578cf;
+    height: 100%;
+    transform-origin: 0% 50%;
+    width: 100%;
+}
+@keyframes indicatorBarAnimation {
+    0% {
+        transform:  translateX(0) scaleX(0);
+    }
+    30% {
+        transform:  translateX(0) scaleX(0.4);
+    }
+    100% {
+        transform:  translateX(100%) scaleX(0.5);
+    }
+}
+
+.indicator-spinner {
+    animation: indicatorSpinnerAnimation 0.666s linear infinite;
+    border: 0.25rem solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 0.25rem solid #0578cf;
+    display: inline-block;
+    height: 1rem;
+    margin-left: 0.5rem;
+    vertical-align: text-bottom;
+    width: 1rem;
+}
+@keyframes indicatorSpinnerAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+.filter-bar .search-query-input {
+    flex-grow: 1;
+}
+.filter-bar .gender-query-filter {
+    margin-left: 1%;
+    text-align: right;
+    width: 20rem;
+}
+
+.form-error {
+    color: #e30;
+    font-size: 1rem;
+    margin: 0.25rem 0 0.5rem 0.625rem;
+}
+
+.notifications .notification-success {
+    background-color: #096;
+    color: #fff;
+    font-size: 1rem;
+    left: 0;
+    padding: 0.625rem 1rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

@@ -1,0 +1,8 @@
+{%- for contact in contact_list -%}
+<div class="contact-entry" id="contact-id-{{ contact.id }}" hx-get="{{ url_for('contact_detail', pk=contact.id) }}"{% if loop.first and search_form.page.data == 1 %} hx-trigger="click, load delay:100ms"{% endif %}>{{ contact.first_name }} {{ contact.last_name }}</div>
+{%- if loop.last and next_page is not none -%}
+<div class="message-entry" hx-get="{{ url_for('contact_list', search_query=search_form.search_query.data, gender_query=search_form.gender_query.data, page=next_page) }}" hx-target="this" hx-swap="outerHTML" hx-trigger="intersect">Loading more...</div>
+{% endif %}
+{%- else -%}
+<div class="message-entry">No results...</div>
+{% endfor %}

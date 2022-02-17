@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}Address Book{% endblock %}
+
+
+{% block page_scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='htmx.min.js') }}" defer></script>
+<script src="{{ url_for('static', filename='htmx.init.js') }}" defer></script>
+{% endblock %}
+
+
+{% block page_content %}
+<div class="notifications"></div>
+
+<div class="htmx-indicator indicator-bar">
+    <div class="indicator-bar-value"></div>
+</div>
+
+<h1>Address Book</h1>
+
+<div class="filter-bar" hx-target=".contact-entries" hx-indicator=".indicator-bar">
+    {{ search_form.search_query(class_='search-query-input', placeholder=search_form.search_query.label.text, autocomplete='off', data_hx_get=url_for('contact_list'), data_hx_trigger='input changed delay:500ms, search', data_hx_include=('#' + search_form.gender_query.id)) }}
+    <div class="gender-query-filter">
+        {{ search_form.gender_query.label }}
+        {{ search_form.gender_query(class='gender_query_select', data_hx_get=url_for('contact_list'), data_hx_include=('#' + search_form.search_query.id)) }}
+    </div>
+</div>
+
+<div class="addressbook">
+    <div class="addressbook-column contact-list" hx-target=".contact-details" hx-indicator=".indicator-bar" hx-ext="mark-selected">
+        <div class="contact-entries">{% include "partials/contact-list.html" %}</div>
+        <button class="add-contact-button" hx-get="{{ url_for('contact_add_form') }}"><img class="button-icon" src="{{ url_for('static', filename='icon-add.svg') }}">Add contact</button>
+    </div>
+    <div class="addressbook-column contact-details" hx-target=".contact-details"></div>
+</div>
+{% endblock %}

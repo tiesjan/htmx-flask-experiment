@@ -1,0 +1,5 @@
+<div hx-swap-oob="outerHTML:#contact-id-{{ contact.id }}" hx-ext="destroy-element"></div>
+
+<div hx-swap-oob="beforeend:.notifications">
+    <div class="notification-success" hx-ext="destroy-element" data-destroy-timeout="5s">Successfully deleted contact <strong>{{ contact.first_name }} {{ contact.last_name }}</strong>!</div>
+</div>

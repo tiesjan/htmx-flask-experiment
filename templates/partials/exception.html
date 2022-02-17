@@ -1,0 +1,3 @@
+{%- set heading_tag = ('h2' if g.htmx is defined and g.htmx else 'h1') -%}
+<{{ heading_tag }}>{{ exception.name }}</{{ heading_tag }}>
+<p>{{ exception.description }}</p>

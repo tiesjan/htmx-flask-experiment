@@ -1,0 +1,46 @@
+<h2>{% if contact is defined %}{{ contact.first_name }} {{ contact.last_name }}{% else %}Add contact{% endif %}</h2>
+
+<form class="contact-properties" novalidate {% if contact is defined %}hx-put="{{ url_for('contact_detail', pk=contact.id) }}"{% else %}hx-post="{{ url_for('contact_list') }}"{% endif %} hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}' hx-indicator=".indicator-spinner" hx-ext="disable-submit-buttons">
+    <div class="contact-property">
+        <div class="contact-property-name">{{ contact_form.first_name.label }}</div>
+        <div class="contact-property-input">
+            {{ contact_form.first_name }}
+            <div id="form-errors-first_name">
+                {% with errors=contact_form.first_name.errors %}{% include "partials/form-errors.html" %}{% endwith %}
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-property">
+        <div class="contact-property-name">{{ contact_form.last_name.label }}</div>
+        <div class="contact-property-input">
+            {{ contact_form.last_name }}
+            <div id="form-errors-last_name">
+                {% with errors=contact_form.last_name.errors %}{% include "partials/form-errors.html" %}{% endwith %}
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-property">
+        <div class="contact-property-name">{{ contact_form.email_address.label }}</div>
+        <div class="contact-property-input">
+            {{ contact_form.email_address(data_hx_post=url_for('validate_email_address'), data_hx_target='#form-errors-email_address', data_hx_params=contact_form.email_address.name) }}
+            <div id="form-errors-email_address">
+                {% with errors=contact_form.email_address.errors %}{% include "partials/form-errors.html" %}{% endwith %}
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-property">
+        <div class="contact-property-name">{{ contact_form.gender.label }}</div>
+        <div class="contact-property-input">
+            {{ contact_form.gender }}
+        </div>
+    </div>
+
+    <p class="submit-buttons">
+        <input type="submit" value="Save">
+        {% if contact is defined %}<button hx-get="{{ url_for('contact_detail', pk=contact.id) }}">Cancel</button>{% endif %}
+        <span class="htmx-indicator indicator-spinner"></span>
+    </p>
+</form>
