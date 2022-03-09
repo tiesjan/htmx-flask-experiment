@@ -1,6 +1,6 @@
 <h2>{% if contact is defined %}{{ contact.first_name }} {{ contact.last_name }}{% else %}Add contact{% endif %}</h2>
 
-<form class="contact-properties" novalidate {% if contact is defined %}hx-put="{{ url_for('contact_detail', pk=contact.id) }}"{% else %}hx-post="{{ url_for('contact_list') }}"{% endif %} hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}' hx-indicator=".indicator-spinner" hx-ext="disable-submit-buttons">
+<form class="contact-properties" novalidate {% if contact is defined %}hx-put="{{ url_for('contact_detail', pk=contact.id) }}"{% else %}hx-post="{{ url_for('contact_list') }}"{% endif %} hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}' hx-indicator=".indicator-spinner" hx-ext="loading-states">
     <div class="contact-property">
         <div class="contact-property-name">{{ contact_form.first_name.label }}</div>
         <div class="contact-property-input">
@@ -39,8 +39,8 @@
     </div>
 
     <p class="submit-buttons">
-        <input type="submit" value="Save">
-        {% if contact is defined %}<button hx-get="{{ url_for('contact_detail', pk=contact.id) }}">Cancel</button>{% endif %}
+        <input type="submit" value="Save" data-loading-disable>
+        {% if contact is defined %}<button hx-get="{{ url_for('contact_detail', pk=contact.id) }}" data-loading-disable>Cancel</button>{% endif %}
         <span class="htmx-indicator indicator-spinner"></span>
     </p>
 </form>

@@ -7,6 +7,7 @@
 {% block page_scripts %}
 {{ super() }}
 <script src="{{ url_for('static', filename='htmx.min.js') }}" defer></script>
+<script src="{{ url_for('static', filename='htmx-ext/loading-states.js') }}" defer></script>
 <script src="{{ url_for('static', filename='htmx.init.js') }}" defer></script>
 {% endblock %}
 
@@ -20,11 +21,11 @@
 
 <h1>Address Book</h1>
 
-<div class="filter-bar" hx-target=".contact-entries" hx-indicator=".indicator-bar">
-    {{ search_form.search_query(class_='search-query-input', placeholder=search_form.search_query.label.text, autocomplete='off', data_hx_get=url_for('contact_list'), data_hx_trigger='input changed delay:500ms, search', data_hx_include=('#' + search_form.gender_query.id)) }}
+<div class="filter-bar" hx-target=".contact-entries" hx-include="this" hx-indicator=".indicator-bar">
+    {{ search_form.search_query(class_='search-query-input', placeholder=search_form.search_query.label.text, autocomplete='off', data_hx_get=url_for('contact_list'), data_hx_trigger='input changed delay:500ms, search') }}
     <div class="gender-query-filter">
         {{ search_form.gender_query.label }}
-        {{ search_form.gender_query(class='gender_query_select', data_hx_get=url_for('contact_list'), data_hx_include=('#' + search_form.search_query.id)) }}
+        {{ search_form.gender_query(class_='gender-query-select', data_hx_get=url_for('contact_list')) }}
     </div>
 </div>
 

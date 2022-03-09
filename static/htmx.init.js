@@ -34,25 +34,6 @@ window.addEventListener('load', function(event) {
         }
     });
 
-    htmx.defineExtension('disable-submit-buttons', {
-        onEvent: function (name, event) {
-            // Find submit buttons
-            const submitButtons = htmx.findAll(
-                '.submit-buttons > button, .submit-buttons > input[type="submit"]'
-            );
-
-            // Disable all submit buttons during requests
-            for (let i = 0; i < submitButtons.length; i++) {
-                if (name === 'htmx:beforeRequest') {
-                    submitButtons[i].disabled = true;
-                }
-                else if (name === 'htmx:afterRequest') {
-                    submitButtons[i].disabled = false;
-                }
-            }
-        }
-    });
-
     htmx.defineExtension('mark-selected', {
         onEvent: function(name, event) {
             // Mark elements when contact details are loaded

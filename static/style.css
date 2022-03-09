@@ -48,6 +48,9 @@ button.danger:hover {
 button.danger:active {
     background-color: #fdd;
 }
+button.danger:disabled {
+    color: #e66;
+}
 button .button-icon {
     height: 1rem;
     margin-right: 0.5rem;
